@@ -1,0 +1,18 @@
+-- Connect to the MySQL server
+local conn = mysql.connect("localhost", "username", "password", "roblox")
+
+-- Get the user's IP address
+local userIP = game:GetService("Players").LocalPlayer:GetUserId()
+
+-- Get the user's Roblox username
+local username = game:GetService("Players").LocalPlayer.Name
+
+-- Get the name of the game
+local gameName = game.Name
+
+-- Insert the collected data into the database
+local query = [[
+    INSERT INTO users (ip_address, username, game_name)
+    VALUES (?, ?, ?)
+]]
+conn:query(query, userIP, username, gameName)
